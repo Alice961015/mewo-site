@@ -88,9 +88,9 @@ img {
 footer {
   margin-top: 50px;
   padding: 20px;
-  background-color: rgb(200, 180, 150);
-  color: #555;
-  font-size: 0.9em; 
+  background-color: rgb(97,60,0);
+  color:rgb(255,255,255);
+  font-size: 1.1em; 
   border-top: 1px solid rgba(0, 0, 0, 0.1); 
   text-align: center; 
   width: 100%; 
@@ -100,4 +100,5 @@ footer {
 
 footer p {
   margin: 5px 0;
+  font-size:1.0em;
 }
