@@ -3,18 +3,25 @@ body {
   text-align: center;
   padding: 20px;
   background-color: rgb(222, 197, 168);
-  /* 新增這些屬性來放大字體和置中 */
-  font-size: 1.2em; /* 預設字體大小，1.2倍於瀏覽器預設 */
-  line-height: 1.6; /* 調整行高 */
-
-  /* 以下用於將頁面內容整體置中 */
+  font-size: 1.2em; 
+  line-height: 1.6; 
+  
   display: flex;
   flex-direction: column;
-  align-items: center; /* 水平置中內容 */
-  justify-content: center; /* 垂直置中內容 (如果內容高度允許) */
-  min-height: 100vh; /* 確保 body 至少佔滿整個視窗高度 */
-  margin: 0; /* 移除預設的 body 外邊距 */
+  min-height: 100vh; 
+  margin: 0;
 }
+
+#quiz, .result {
+  flex-grow: 1; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%; 
+  box-sizing: border-box;
+}
+
 
 h1 {
   font-size: 2.5em; /* 讓標題更大 */
@@ -76,4 +83,21 @@ img {
   margin-top: 20px;
   border-radius: 10px; /* 圖片圓角 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
+}
+
+footer {
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgb(200, 180, 150);
+  color: #555;
+  font-size: 0.9em; 
+  border-top: 1px solid rgba(0, 0, 0, 0.1); 
+  text-align: center; 
+  width: 100%; 
+  box-sizing: border-box;
+  position: relative;
+}
+
+footer p {
+  margin: 5px 0;
 }
