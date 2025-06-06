@@ -127,7 +127,7 @@
       let topCats = Object.keys(scores).filter(cat => scores[cat] === max);
       let html = `<h2>你最像的貓貓是：</h2>`;
       topCats.forEach(cat => {
-        html += `<h3>${emoji[cat]}</h3><img src="圖片/${cat}.png" alt="${emoji[cat]}"><p>${advice[cat]}</p>`;
+        html += `<h3>${emoji[cat]}</h3><img src="${cat}.png" alt="${emoji[cat]}"><p>${advice[cat]}</p>`;
       });
       quizDiv.innerHTML = "";
       resultDiv.innerHTML = html;
