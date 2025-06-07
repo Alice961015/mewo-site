@@ -38,7 +38,7 @@ h1 {
     transform: translateY(0px); /* 動畫開始時，不移動 */
   }
   50% {
-    transform: translateY(20px); /* 動畫到一半時，向下浮動 20 像素 */
+    transform: translateY(40px); /* 動畫到一半時，向下浮動 20 像素 */
   }
   100% {
     transform: translateY(0px); /* 動畫結束時，回到原始位置 */
