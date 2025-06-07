@@ -26,6 +26,23 @@ body {
 h1 {
   font-size: 2.5em; /* 讓標題更大 */
   margin-bottom: 30px; /* 增加標題下方空間 */
+  color: #333; /* 標題文字顏色，可根據背景調整 */
+  
+  /* 新增以下動畫屬性 */
+  animation: float 3s ease-in-out infinite; /* 應用動畫 */
+}
+
+/* 定義標題浮動的動畫 */
+@keyframes float {
+  0% {
+    transform: translateY(0px); /* 動畫開始時，不移動 */
+  }
+  50% {
+    transform: translateY(-10px); /* 動畫到一半時，向上浮動 10 像素 */
+  }
+  100% {
+    transform: translateY(0px); /* 動畫結束時，回到原始位置 */
+  }
 }
 
 .question {
