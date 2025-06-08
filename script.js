@@ -1,4 +1,3 @@
- <script>
     const quizData = [
       ["1.你是否容易拖延？", [
         ["幾乎每天都這樣", ["ice"]],
@@ -104,4 +103,3 @@
     }
 
     showQuestion();
-  </script>
