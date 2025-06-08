@@ -6,11 +6,12 @@ body {
     background-color: rgb(222, 197, 168);
     font-size: 1.2em;
     line-height: 1.6;
-    
-    display: flex;
-    flex-direction: column; /* 讓 h1, main-container, footer 垂直堆疊 */
-    min-height: 100vh; /* 確保 body 至少佔據整個視窗高度 */
     margin: 0; /* 移除 body 預設外邊距 */
+    
+    /* 確保 body 能夠容納所有內容並推動 footer */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 /* -------------------- 標題樣式 -------------------- */
@@ -29,71 +30,53 @@ h1 {
     100% { transform: translateY(0px); }
 }
 
-/* -------------------- 主要內容容器 (Flexbox佈局) -------------------- */
-.main-container {
-    display: flex; /* 啟用 Flexbox 佈局 */
-    justify-content: center; /* 將內容水平居中 */
-    align-items: flex-start; /* <--- 讓所有子元素從頂部對齊 */
-    gap: 50px; /* 測驗內容和側邊 GIF 之間的間距 */
-    width: 90%; /* 限制容器寬度 */
-    max-width: 1200px; /* 最大寬度 */
-    margin: 0 auto; /* 水平置中，垂直自動 */
-    flex-grow: 1; /* 讓 main-container 佔據剩餘垂直空間 */
-    flex-wrap: wrap; /* 允許內容換行，在小螢幕上讓 GIF 移到下方 */
-    /* 增加一個最小高度，確保在內容較少時也能保持佈局穩定 */
-    min-height: 400px; /* 您可以根據內容調整這個值 */
+/* -------------------- 主要內容容器 (定位基準點) -------------------- */
+.main-content-wrapper {
+    position: relative; /* <--- 設置為相對定位，以便子元素可以絕對定位 */
+    flex-grow: 1; /* 讓它佔據所有可用空間，將 footer 推到底部 */
+    width: 100%; /* 佔滿寬度 */
+    max-width: 1200px; /* 限制最大寬度，保持中心化 */
+    margin: 0 auto; /* 水平居中 */
+    overflow: hidden; /* 防止內容溢出 */
+    min-height: 500px; /* <--- 確保有一個最小高度，防止內容太少時被壓縮 */
 }
+
 
 /* -------------------- 測驗區塊樣式 (#quiz 和 .result) -------------------- */
 #quiz, .result {
-    flex-basis: 60%; /* 測驗內容佔據主要部分 */
-    max-width: 600px; /* 限制測驗內容的最大寬度 */
-    min-width: 300px; /* 確保測驗內容在小螢幕下也有最小寬度 */
-    
-    display: flex; /* <--- 讓其內部內容也使用 Flexbox */
-    flex-direction: column; /* <--- 垂直排列其內部內容 */
-    align-items: center; /* <--- 水平居中其內部內容 */
-    justify-content: flex-start; /* <--- 內容從頂部開始排列，防止被擠壓 */
-    
-    padding: 20px; /* 內部留白 */
+    position: absolute; /* <--- 設置為絕對定位 */
+    top: 50%; /* <--- 從頂部向下 50% */
+    left: 50%; /* <--- 從左側向右 50% */
+    transform: translate(-50%, -50%); /* <--- 使用 transform 實現精準居中 */
+    width: 90%; /* 佔據容器寬度的 90% */
+    max-width: 600px; /* 限制最大寬度 */
     box-sizing: border-box;
+    padding: 20px;
+    
+    display: flex; /* 內部內容使用 Flexbox */
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 內部內容水平居中 */
+    justify-content: center; /* 內部內容垂直居中 */
+    z-index: 10; /* <--- 確保在 GIF 之上 */
 }
 
-/* 確保結果區塊始終居中顯示在它的 flex 容器（.main-container）中，同時與 GIF 並排 */
-.result {
-    /* 當 result 顯示時，它將是 .main-container 的一個 flex item。 */
-    /* 確保其內部內容居中。 */
-    justify-content: center; /* <--- 讓結果文字和圖片在垂直方向上居中 */
-    align-self: center; /* <--- 讓 result 自身在 main-container 中垂直居中對齊 */
+/* -------------------- 背景 GIF 圖層樣式 -------------------- */
+.background-gif-layer {
+    position: absolute; /* <--- 設置為絕對定位 */
+    top: 50%; /* <--- 從頂部向下 50% */
+    right: 50px; /* <--- 從右側 50px 的位置開始 */
+    transform: translateY(-50%); /* <--- 垂直居中對齊 */
+    width: 200px; /* <--- GIF 容器寬度，可調整 */
+    height: 200px; /* <--- GIF 容器高度，可調整 */
+    z-index: 5; /* <--- 確保在測驗內容之下 */
+    opacity: 0.8; /* <--- 可以添加一些透明度，使其更像背景，可調整 */
+    pointer-events: none; /* <--- 確保 GIF 不會阻擋滑鼠點擊測驗按鈕 */
 }
 
-
-/* -------------------- 側邊 GIF 容器樣式 -------------------- */
-.right-side-gif {
-    flex-basis: 30%; /* GIF 容器佔據剩餘部分 */
-    max-width: 300px; /* 限制 GIF 容器的最大寬度 */
-    text-align: center; /* 讓 GIF 圖片在其容器中居中 */
-    padding-top: 50px; /* 調整與頂部的垂直位置 */
-    margin-bottom: 20px;
-    
-    /* 確保其在 flex 容器中表現正確 */
-    display: flex; 
-    justify-content: center; /* 水平居中圖片 */
-    align-items: flex-start; /* <--- GIF 圖片從容器頂部開始對齊 */
-    flex-direction: column; /* 確保內容垂直排列 */
-    
-    /* 添加 flex-shrink 屬性，防止在空間不足時被過度擠壓 */
-    flex-shrink: 0; /* <--- 防止這個項目在空間不足時縮小 */
-}
-
-.right-side-gif img {
-    max-width: 100%; /* 確保 GIF 不會超出其容器 */
-    height: auto; /* 保持圖片比例 */
-    border-radius: 10px; /* 圖片圓角 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
-    
-    display: block;
-    margin: 0 auto;
+.background-gif-layer img {
+    width: 100%; /* 確保 GIF 圖片填滿其容器 */
+    height: 100%; /* 確保 GIF 圖片填滿其容器 */
+    object-fit: contain; /* 保持圖片比例，並在容器內顯示完整 */
 }
 
 /* -------------------- 問題區塊樣式 -------------------- */
@@ -205,20 +188,23 @@ footer p {
 /* -------------------- RWD (響應式設計) -------------------- */
 @media (max-width: 768px) {
     /* 當螢幕寬度小於 768px 時 */
-    .main-container {
-        flex-direction: column; /* 垂直排列，讓 GIF 在測驗下方 */
-        align-items: center; /* 垂直排列時內容居中 */
-        gap: 20px; /* 調整垂直間距 */
+    .main-content-wrapper {
+        min-height: 600px; /* 提高最小高度，確保在手機上也有足夠空間 */
     }
 
-    #quiz, .result, .right-side-gif {
-        flex-basis: auto; /* 移除固定比例，讓內容根據需要佔滿寬度 */
-        width: 100%; /* 確保內容佔滿可用寬度 */
-        max-width: none; /* 移除最大寬度限制 */
+    #quiz, .result {
+        width: 95%; /* 小螢幕下佔據更多寬度 */
+        top: 40%; /* 調整垂直位置，因為 GIF 會疊在下方或上方 */
     }
 
-    .right-side-gif {
-        padding-top: 0; /* 在小螢幕上移除頂部留白 */
+    .background-gif-layer {
+        top: 80%; /* <--- 在小螢幕上將 GIF 移到下方 */
+        left: 50%; /* 水平居中 */
+        right: auto; /* 移除 right 屬性 */
+        transform: translate(-50%, -50%); /* 水平垂直居中 */
+        width: 150px; /* 縮小 GIF 大小 */
+        height: 150px;
+        z-index: 1; /* 確保在下方 */
     }
 
     h1 {
@@ -243,9 +229,6 @@ footer p {
     }
 
     .result p {
-        font-size: 1.1em;
-    }
-}
         font-size: 1.1em;
     }
 }
