@@ -1,142 +1,229 @@
+/* -------------------- 通用樣式 -------------------- */
 body {
-  font-family: sans-serif;
-  text-align: center;
-  padding: 20px;
-  background-color: rgb(222, 197, 168);
-  font-size: 1.2em; 
-  line-height: 1.6; 
-  
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; 
-  margin: 0;
+    font-family: sans-serif;
+    text-align: center;
+    padding: 0; /* 移除 body 的 padding，因為主要內容會使用 margin/padding 控制 */
+    background-color: rgb(222, 197, 168);
+    font-size: 1.2em;
+    line-height: 1.6;
+    
+    display: flex;
+    flex-direction: column; /* 讓 h1, main-container, footer 垂直堆疊 */
+    min-height: 100vh; /* 確保 body 至少佔據整個視窗高度 */
+    margin: 0; /* 移除 body 預設外邊距 */
 }
 
-#quiz, .result {
-  flex-grow: 1; 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%; 
-  box-sizing: border-box;
-}
-
-
+/* -------------------- 標題樣式 -------------------- */
 h1 {
-  font-size: 2.5em; /* 讓標題更大 */
-  margin-bottom: 30px; /* 增加標題下方空間 */
-  color: #333; /* 標題文字顏色，可根據背景調整 */
-  
-  /* 新增以下動畫屬性 */
-  animation: float 3s ease-in-out infinite; /* 應用動畫 */
+    font-size: 2.5em; /* 讓標題更大 */
+    margin-top: 30px; /* 增加標題上方空間 */
+    margin-bottom: 30px; /* 增加標題下方空間 */
+    color: #333; /* 標題文字顏色 */
+    animation: float 3s ease-in-out infinite; /* 應用浮動動畫 */
 }
 
 /* 定義標題浮動的動畫 */
 @keyframes float {
-  0% {
-    transform: translateY(0px); /* 動畫開始時，不移動 */
-  }
-  50% {
-    transform: translateY(40px); /* 動畫到一半時，向下浮動 20 像素 */
-  }
-  100% {
-    transform: translateY(0px); /* 動畫結束時，回到原始位置 */
-  }
+    0% { transform: translateY(0px); } /* 動畫開始時，不移動 */
+    50% { transform: translateY(20px); } /* 動畫到一半時，向下浮動 20 像素 */
+    100% { transform: translateY(0px); } /* 動畫結束時，回到原始位置 */
 }
 
+/* -------------------- 主要內容容器 (Flexbox佈局) -------------------- */
+.main-container {
+    display: flex; /* 啟用 Flexbox 佈局 */
+    justify-content: center; /* 將內容水平居中 */
+    align-items: flex-start; /* 讓測驗區和 GIF 從頂部對齊 */
+    gap: 50px; /* 測驗內容和側邊 GIF 之間的間距 */
+    width: 90%; /* 限制容器寬度 */
+    max-width: 1200px; /* 最大寬度 */
+    margin: 0 auto; /* 水平置中，垂直自動 */
+    flex-grow: 1; /* 讓 main-container 佔據剩餘垂直空間 */
+    flex-wrap: wrap; /* 允許內容換行，在小螢幕上讓 GIF 移到下方 */
+}
+
+/* -------------------- 測驗區塊樣式 (#quiz 和 .result) -------------------- */
+#quiz, .result {
+    flex-basis: 60%; /* 測驗內容佔據主要部分 */
+    max-width: 600px; /* 限制測驗內容的最大寬度 */
+    min-width: 300px; /* 確保測驗內容在小螢幕下也有最小寬度 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start; /* 內容從頂部開始排列 */
+    padding: 20px; /* 內部留白 */
+    box-sizing: border-box;
+    /* 您可以根據需要為測驗區塊添加背景色或邊框 */
+}
+
+/* -------------------- 側邊 GIF 容器樣式 -------------------- */
+.right-side-gif {
+    flex-basis: 30%; /* GIF 容器佔據剩餘部分 */
+    max-width: 300px; /* 限制 GIF 容器的最大寬度 */
+    text-align: center; /* 讓 GIF 圖片在其容器中居中 */
+    padding-top: 50px; /* 調整與頂部的垂直位置 */
+    /* 在小螢幕換行時，確保有足夠的上下間距 */
+    margin-bottom: 20px; 
+}
+
+.right-side-gif img {
+    max-width: 100%; /* 確保 GIF 不會超出其容器 */
+    height: auto; /* 保持圖片比例 */
+    border-radius: 10px; /* 圖片圓角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
+}
+
+/* -------------------- 問題區塊樣式 -------------------- */
 .question {
-  margin-bottom: 30px;
+    margin-bottom: 30px;
+    width: 100%; /* 確保問題區塊填滿父容器 */
 }
 
 .question h2 {
-  font-size: 1.8em; /* 讓問題文字更大 */
-  margin-bottom: 25px; /* 增加問題與選項間距 */
+    font-size: 1.8em; /* 讓問題文字更大 */
+    margin-bottom: 25px; /* 增加問題與選項間距 */
 }
 
 .question-header {
-  display: flex; /* 啟用 Flexbox 佈局 */
-  align-items: center; /* 垂直居中對齊子元素（h2 和 img） */
-  justify-content: center; /* 水平居中整個問題頭部 */
-  gap: 15px; /* h2 和 img 之間的間距 */
-  margin-bottom: 20px; /* 問題頭部與選項之間的間距 */
-  flex-wrap: wrap; /* 如果空間不足，允許換行 */
+    display: flex; /* 啟用 Flexbox 佈局 */
+    align-items: center; /* 垂直居中對齊子元素（h2） */
+    justify-content: center; /* 水平居中整個問題頭部 */
+    gap: 15px; /* h2 之間的間距 (如果 h2 有多個) */
+    margin-bottom: 20px; /* 問題頭部與選項之間的間距 */
+    flex-wrap: wrap; /* 如果空間不足，允許換行 */
 }
 
 .question-header h2 {
-  margin: 0; /* 移除 h2 預設的外邊距，以免影響對齊 */
-  /* 您可能還想調整 h2 的字體大小、顏色等 */
+    margin: 0; /* 移除 h2 預設的外邊距，以免影響對齊 */
 }
 
+/* -------------------- 選項按鈕樣式 -------------------- */
 .option {
-  display: block; /* 讓每個選項按鈕佔據一行 */
-  margin: 10px auto; /* 水平置中按鈕，並增加上下間距 */
-  padding: 12px 25px; /* 增加按鈕內邊距 */
-  font-size: 1.3em; /* 讓按鈕文字更大 */
-  background-color: #f0f0f0; /* 按鈕背景色 */
-  border: 1px solid #ccc; /* 按鈕邊框 */
-  border-radius: 8px; /* 圓角 */
-  cursor: pointer; /* 鼠標變為手型 */
-  transition: background-color 0.3s ease; /* 平滑過渡效果 */
-  width: 80%; /* 限制按鈕寬度 */
-  max-width: 400px; /* 最大寬度，防止過寬 */
-  box-sizing: border-box; /* 確保 padding 不增加寬度 */
+    display: block; /* 讓每個選項按鈕佔據一行 */
+    margin: 10px auto; /* 水平置中按鈕，並增加上下間距 */
+    padding: 12px 25px; /* 增加按鈕內邊距 */
+    font-size: 1.3em; /* 讓按鈕文字更大 */
+    background-color: #f0f0f0; /* 按鈕背景色 */
+    border: 1px solid #ccc; /* 按鈕邊框 */
+    border-radius: 8px; /* 圓角 */
+    cursor: pointer; /* 鼠標變為手型 */
+    transition: background-color 0.3s ease; /* 平滑過渡效果 */
+    width: 80%; /* 限制按鈕寬度 */
+    max-width: 400px; /* 最大寬度，防止過寬 */
+    box-sizing: border-box; /* 確保 padding 不增加寬度 */
 }
 
 .option:hover {
-  background-color: #e0e0e0; /* 懸停時背景色變深 */
+    background-color: #e0e0e0; /* 懸停時背景色變深 */
 }
 
+/* -------------------- 結果區塊樣式 -------------------- */
 .result {
-  margin-top: 40px;
+    /* result 已經被 #quiz, .result 的樣式涵蓋，這裡可以放額外樣式 */
 }
 
 .result h2 {
-  font-size: 2em; /* 結果頁標題 */
+    font-size: 2em; /* 結果頁標題 */
 }
 
 .result h3 {
-  font-size: 1.7em; /* 貓貓名稱 */
-  color: #333;
+    font-size: 1.7em; /* 貓貓名稱 */
+    color: #333;
 }
 
 .result p {
-  font-size: 1.3em; /* 建議文字 */
-  line-height: 1.5;
-  max-width: 600px; /* 限制建議文字的寬度 */
-  margin: 20px auto; /* 水平置中建議文字 */
+    font-size: 1.3em; /* 建議文字 */
+    line-height: 1.5;
+    max-width: 600px; /* 限制建議文字的寬度 */
+    margin: 20px auto; /* 水平置中建議文字 */
 }
 
-img {
-  width: 300px;
-  max-width: 90%; /* 確保圖片在小螢幕上不會超出 */
-  height: auto; /* 保持圖片比例 */
-  margin-top: 20px;
+.result-image { /* 為結果圖片新增樣式 */
+  max-width: 150px; /* 控制結果圖片的最大寬度 */
+  height: auto; /* 高度自動調整，保持比例 */
+  display: block; /* 讓圖片獨佔一行 */
+  margin: 20px auto; /* 置中顯示 */
   border-radius: 10px; /* 圖片圓角 */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
 }
 
-.gif-animation {
-  max-width: 100%; /* 確保圖片不會超出容器寬度 */
-  height: auto; /* 高度自動調整，保持比例 */
-  display: block; /* 讓圖片獨佔一行，方便置中 */
-  margin: 20px auto; /* 上下外邊距 20px，左右自動，實現水平置中 */
+.restart-button { /* 重新測驗按鈕樣式 */
+    display: block;
+    margin: 30px auto;
+    padding: 15px 30px;
+    font-size: 1.4em;
+    background-color: #4CAF50; /* 綠色按鈕 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.restart-button:hover {
+    background-color: #45a049;
+}
+
+
+/* -------------------- 頁腳樣式 -------------------- */
 footer {
-  margin-top: 50px;
-  padding: 20px;
-  background-color: rgb(137,112,73);
-  color:rgb(255,255,255);
-  font-size: 1.1em; 
-  border-top: 1px solid rgba(0, 0, 0, 0.1); 
-  text-align: center; 
-  width: 100%; 
-  box-sizing: border-box;
-  position: relative;
+    margin-top: auto; /* 將 footer 推到底部 */
+    padding: 20px;
+    background-color: rgb(137,112,73);
+    color:rgb(255,255,255);
+    font-size: 1.1em;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 100%;
+    box-sizing: border-box; /* 確保 padding 不增加寬度 */
 }
 
 footer p {
-  margin: 5px 0;
-  font-size:1.0em;
+    margin: 5px 0;
+    font-size:1.0em;
+}
+
+/* -------------------- RWD (響應式設計) -------------------- */
+@media (max-width: 768px) {
+    /* 當螢幕寬度小於 768px 時 */
+    .main-container {
+        flex-direction: column; /* 垂直排列，讓 GIF 在測驗下方 */
+        align-items: center; /* 垂直排列時內容居中 */
+        gap: 20px; /* 調整垂直間距 */
+    }
+
+    #quiz, .result, .right-side-gif {
+        flex-basis: auto; /* 移除固定比例，讓內容根據需要佔滿寬度 */
+        width: 100%; /* 確保內容佔滿可用寬度 */
+        max-width: none; /* 移除最大寬度限制 */
+    }
+
+    .right-side-gif {
+        padding-top: 0; /* 在小螢幕上移除頂部留白 */
+    }
+
+    h1 {
+        font-size: 2em; /* 縮小標題字體 */
+    }
+
+    .question h2 {
+        font-size: 1.5em; /* 縮小問題字體 */
+    }
+
+    .option {
+        font-size: 1.1em; /* 縮小按鈕字體 */
+        padding: 10px 20px; /* 調整按鈕內邊距 */
+    }
+
+    .result h2 {
+        font-size: 1.8em;
+    }
+
+    .result h3 {
+        font-size: 1.5em;
+    }
+
+    .result p {
+        font-size: 1.1em;
+    }
 }
