@@ -146,12 +146,10 @@ h1 {
 }
 
 .result-image {
-  max-width: 400px;
+  max-width: 500px;
   height: auto;
   display: block;
   margin: 20px auto;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .restart-button { /* 重新測驗按鈕樣式 */
