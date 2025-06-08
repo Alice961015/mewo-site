@@ -102,6 +102,15 @@ img {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
 }
 
+.gif-animation {
+  max-width: 100%; /* 確保圖片不會超出容器寬度 */
+  height: auto; /* 高度自動調整，保持比例 */
+  display: block; /* 讓圖片獨佔一行，方便置中 */
+  margin: 20px auto; /* 上下外邊距 20px，左右自動，實現水平置中 */
+  border-radius: 10px; /* 添加輕微圓角 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 添加輕微陰影 */
+}
+
 footer {
   margin-top: 50px;
   padding: 20px;
