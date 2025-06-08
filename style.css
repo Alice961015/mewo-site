@@ -146,10 +146,13 @@ h1 {
 }
 
 .result-image {
-  max-width: 500px;
-  height: auto;
-  display: block;
-  margin: 20px auto;
+  width: 100%; /* <--- 新增：確保圖片在容器內盡可能寬 */
+  max-width: 500px; /* <--- 圖片的最大寬度，當空間允許時會達到 500px */
+  height: auto; /* 保持圖片比例 */
+  display: block; /* 確保是區塊元素 */
+  margin: 20px auto; /* 確保水平置中 */
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .restart-button { /* 重新測驗按鈕樣式 */
@@ -192,7 +195,7 @@ footer p {
 @media (max-width: 768px) {
     /* 當螢幕寬度小於 768px 時 */
     .main-content-wrapper {
-        min-height: 600px; /* 提高最小高度，確保在手機上也有足夠空間 */
+        min-height: 400px; /* 提高最小高度，確保在手機上也有足夠空間 */
     }
 
     #quiz, .result {
