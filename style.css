@@ -146,7 +146,7 @@ h1 {
 }
 
 .result-image {
-  max-width: 500px;
+  max-width: 1000px;
   height: auto;
   display: block;
   margin: 20px auto;
@@ -237,9 +237,5 @@ footer p {
 
     .result p {
         font-size: 1.1em;
-    }
-
-    .result-image {
-        max-width: 180px; /* <--- 在小螢幕下也可以適當調大，確保不會超出畫面 */
     }
 }
