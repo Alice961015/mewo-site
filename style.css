@@ -69,8 +69,6 @@ h1 {
 .right-side-gif img {
     max-width: 100%; /* 確保 GIF 不會超出其容器 */
     height: auto; /* 保持圖片比例 */
-    border-radius: 10px; /* 圖片圓角 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 圖片陰影 */
 }
 
 /* -------------------- 問題區塊樣式 -------------------- */
