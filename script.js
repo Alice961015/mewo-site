@@ -88,7 +88,6 @@ function showQuestion() {
         <div class="question">
             <div class="question-header">
                 <h2>${questionText}</h2>
-                <img src="gif貓貓走路.gif" alt="題目示意動畫" class="question-gif">
             </div>
     `;
     options.forEach((opt, index) => {
