@@ -32,13 +32,13 @@ h1 {
 
 /* -------------------- 主要內容容器 (定位基準點) -------------------- */
 .main-content-wrapper {
-    position: relative; /* <--- 設置為相對定位，以便子元素可以絕對定位 */
+    position: relative; /* 設置為相對定位，以便子元素可以絕對定位 */
     flex-grow: 1; /* 讓它佔據所有可用空間，將 footer 推到底部 */
     width: 100%; /* 佔滿寬度 */
     max-width: 1200px; /* 限制最大寬度，保持中心化 */
     margin: 0 auto; /* 水平居中 */
     overflow: hidden; /* 防止內容溢出 */
-    min-height: 500px; /* <--- 確保有一個最小高度，防止內容太少時被壓縮 */
+    min-height: 500px; /* 確保有一個最小高度，防止內容太少時被壓縮 */
 }
 
 
@@ -57,7 +57,8 @@ h1 {
     flex-direction: column; /* 垂直排列 */
     align-items: center; /* 內部內容水平居中 */
     justify-content: center; /* 內部內容垂直居中 */
-    z-index: 10; /* <--- 確保在 GIF 之上 */
+    z-index: 10; /* <--- 確保在 GIF 之上，數值越大越靠上 */
+    background-color: rgba(255, 255, 255, 0); /* 保持透明背景，這樣 GIF 可以從下方透出 */
 }
 
 /* -------------------- 背景 GIF 圖層樣式 -------------------- */
@@ -65,18 +66,22 @@ h1 {
     position: absolute; /* <--- 設置為絕對定位 */
     top: 50%; /* <--- 從頂部向下 50% */
     right: 50px; /* <--- 從右側 50px 的位置開始 */
-    transform: translateY(-50%); /* <--- 垂直居中對齊 */
+    transform: translateY(-50%); /* <--- 垂直居中對齊 GIF 容器 */
     width: 200px; /* <--- GIF 容器寬度，可調整 */
     height: 200px; /* <--- GIF 容器高度，可調整 */
-    z-index: 5; /* <--- 確保在測驗內容之下 */
-    opacity: 0.8; /* <--- 可以添加一些透明度，使其更像背景，可調整 */
+    z-index: 15; /* <--- 讓它在測驗內容之上，比 z-index: 10 更高 */
+    opacity: 1; /* <--- 保持不透明，或根據需要調整透明度 */
     pointer-events: none; /* <--- 確保 GIF 不會阻擋滑鼠點擊測驗按鈕 */
+    /* background-color: rgba(255, 0, 0, 0.2); */ /* 暫時除錯用，顯示 GIF 容器範圍，確認佈局，完成後請移除 */
 }
 
 .background-gif-layer img {
     width: 100%; /* 確保 GIF 圖片填滿其容器 */
     height: 100%; /* 確保 GIF 圖片填滿其容器 */
     object-fit: contain; /* 保持圖片比例，並在容器內顯示完整 */
+    /* 移除圓角和陰影 */
+    /* border-radius: 0; */
+    /* box-shadow: none; */
 }
 
 /* -------------------- 問題區塊樣式 -------------------- */
@@ -194,17 +199,19 @@ footer p {
 
     #quiz, .result {
         width: 95%; /* 小螢幕下佔據更多寬度 */
-        top: 40%; /* 調整垂直位置，因為 GIF 會疊在下方或上方 */
+        top: 50%; /* 在小螢幕下也嘗試垂直居中 */
+        left: 50%;
+        transform: translate(-50%, -50%);
     }
 
     .background-gif-layer {
-        top: 80%; /* <--- 在小螢幕上將 GIF 移到下方 */
-        left: 50%; /* 水平居中 */
+        top: 10%; /* <--- 在小螢幕上將 GIF 移到上方 */
         right: auto; /* 移除 right 屬性 */
-        transform: translate(-50%, -50%); /* 水平垂直居中 */
+        left: 50%; /* 水平居中 */
+        transform: translate(-50%, 0%); /* 僅水平居中，垂直靠 top 調整 */
         width: 150px; /* 縮小 GIF 大小 */
         height: 150px;
-        z-index: 1; /* 確保在下方 */
+        z-index: 15; /* 保持在最上層 */
     }
 
     h1 {
